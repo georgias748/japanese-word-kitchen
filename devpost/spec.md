@@ -49,7 +49,7 @@ Relevant documentation:
 - Python http.server: https://docs.python.org/3/library/http.server.html
 
 ## Where It Runs and How Someone Tries It
-This app runs entirely in a browser on the learner's local machine. It does not require a hosted backend, sign-in, or deployment to prove the concept. For the required hackathon submission, a short demo video can be recorded locally while the app runs in a browser.
+This app runs entirely in a browser and does not require a hosted backend or sign-in. It can be tried locally or through the public GitHub Pages site. Saved progress remains in browser storage on the current device and does not sync between devices. For the required hackathon submission, a short demo video can be recorded locally while the app runs in a browser.
 
 Local run steps:
 1. Open the project folder in VS Code.
@@ -58,6 +58,10 @@ Local run steps:
 4. Use the app to start a study session, add custom vocabulary, and review missed words.
 
 If using VS Code Live Server, open the folder and start the server from the editor instead; the app still runs locally in the browser.
+
+Public sharing links:
+- GitHub repository: https://github.com/georgias748/japanese-word-kitchen
+- Hosted app: https://georgias748.github.io/japanese-word-kitchen/
 
 This meets the requirement that deployment is optional and not a substitute for the demo video or code repository.
 
