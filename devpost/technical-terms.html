@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A beginner-friendly guide to the computer terms and steps involved in building Japanese Word Kitchen."
+    />
+    <title>Building Japanese Word Kitchen — A Beginner's Guide</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --paper: #fbf4e3;
+        --panel: #fffdf7;
+        --ink: #32241b;
+        --muted: #685747;
+        --wood: #795135;
+        --gold: #ead39a;
+        --sage: #e5eddd;
+        --line: #e4d5b8;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.65;
+      }
+
+      header {
+        padding: 56px 22px 44px;
+        background: linear-gradient(145deg, #f2dfb5, #fbf4e3 72%);
+        border-bottom: 1px solid var(--line);
+      }
+
+      main,
+      .hero-inner {
+        width: min(920px, 100%);
+        margin: 0 auto;
+      }
+
+      .hero-inner {
+        padding: 0 22px;
+      }
+
+      .eyebrow {
+        margin: 0 0 8px;
+        color: var(--wood);
+        font-size: 0.82rem;
+        font-weight: 750;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3 {
+        line-height: 1.2;
+      }
+
+      h1 {
+        max-width: 720px;
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(2.2rem, 6vw, 3.8rem);
+        font-weight: 600;
+      }
+
+      .intro {
+        max-width: 700px;
+        margin: 18px 0 0;
+        color: var(--muted);
+        font-size: 1.1rem;
+      }
+
+      main {
+        padding: 28px 22px 64px;
+      }
+
+      nav,
+      section,
+      .callout {
+        margin: 0 0 22px;
+        padding: 24px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        box-shadow: 0 5px 18px rgb(62 43 25 / 5%);
+      }
+
+      nav h2,
+      section h2 {
+        margin: 0 0 14px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 1.65rem;
+      }
+
+      nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 20px;
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      a {
+        color: #65401f;
+        text-underline-offset: 3px;
+      }
+
+      a:hover {
+        color: #3d2816;
+      }
+
+      p {
+        margin: 0 0 12px;
+      }
+
+      p:last-child {
+        margin-bottom: 0;
+      }
+
+      .callout {
+        background: #fff8e7;
+        border-left: 5px solid #bf8d3c;
+      }
+
+      .callout strong {
+        color: #60421f;
+      }
+
+      .analogy {
+        margin-top: 12px;
+        padding: 12px 15px;
+        background: #f6f0e5;
+        border-radius: 10px;
+        color: #554639;
+      }
+
+      .term-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+        gap: 14px;
+      }
+
+      .term {
+        padding: 16px;
+        background: #fffdf8;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+      }
+
+      .term h3 {
+        margin: 0 0 8px;
+        color: #67462a;
+        font-size: 1.05rem;
+      }
+
+      .term p {
+        color: var(--muted);
+        font-size: 0.96rem;
+      }
+
+      .steps {
+        counter-reset: build-step;
+        display: grid;
+        gap: 12px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .steps li {
+        counter-increment: build-step;
+        position: relative;
+        padding: 15px 16px 15px 56px;
+        background: #fffdf8;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+      }
+
+      .steps li::before {
+        position: absolute;
+        top: 13px;
+        left: 15px;
+        display: grid;
+        width: 29px;
+        height: 29px;
+        place-items: center;
+        content: counter(build-step);
+        background: var(--gold);
+        border-radius: 50%;
+        font-weight: 750;
+      }
+
+      .steps strong {
+        display: block;
+        margin-bottom: 3px;
+      }
+
+      .build-flow {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        gap: 12px;
+        margin: 18px 0 24px;
+      }
+
+      .build-stage {
+        position: relative;
+        padding: 16px;
+        background: #fffdf8;
+        border: 1px solid var(--line);
+        border-top: 4px solid #b4874d;
+        border-radius: 12px;
+      }
+
+      .build-stage .stage-number {
+        display: inline-grid;
+        width: 28px;
+        height: 28px;
+        margin-bottom: 9px;
+        place-items: center;
+        background: var(--gold);
+        border-radius: 50%;
+        font-weight: 750;
+      }
+
+      .build-stage h3 {
+        margin: 0 0 8px;
+        font-size: 1.05rem;
+      }
+
+      .build-stage p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.94rem;
+      }
+
+      .term-chip {
+        display: inline-block;
+        margin: 8px 4px 0 0;
+        padding: 3px 8px;
+        background: #f2ead9;
+        border-radius: 999px;
+        color: #60482d;
+        font-size: 0.78rem;
+        font-weight: 700;
+      }
+
+      .flow {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        margin: 18px 0;
+      }
+
+      .flow span {
+        padding: 8px 12px;
+        background: var(--sage);
+        border: 1px solid #d3dfca;
+        border-radius: 9px;
+        font-weight: 650;
+        text-align: center;
+      }
+
+      .flow b {
+        color: var(--wood);
+      }
+
+      pre {
+        overflow-x: auto;
+        margin: 14px 0 0;
+        padding: 16px;
+        background: #2f2923;
+        border-radius: 10px;
+        color: #fff7e8;
+        font-size: 0.92rem;
+        line-height: 1.5;
+      }
+
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+
+      .small {
+        color: var(--muted);
+        font-size: 0.94rem;
+      }
+
+      footer {
+        padding: 10px 0 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+        text-align: center;
+      }
+
+      @media (max-width: 600px) {
+        header {
+          padding-top: 38px;
+        }
+
+        nav,
+        section,
+        .callout {
+          padding: 19px;
+        }
+      }
+
+      @media print {
+        body {
+          background: white;
+        }
+
+        header {
+          padding-top: 20px;
+        }
+
+        nav,
+        section,
+        .callout {
+          box-shadow: none;
+          break-inside: avoid;
+        }
+
+        a {
+          color: inherit;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="hero-inner">
+        <p class="eyebrow">A gentle introduction</p>
+        <h1>How we build Japanese Word Kitchen</h1>
+        <p class="intro">
+          A plain-language guide to the computer terms, files, and steps behind the app.
+          You do not need to know any of these words already. This page describes the
+          current draft approach, not decisions you have already approved.
+        </p>
+      </div>
+    </header>
+
+    <main>
+      <nav aria-label="Page contents">
+        <h2>On this page</h2>
+        <ul>
+          <li><a href="#big-picture">The big picture</a></li>
+          <li><a href="#ingredients">The main ingredients</a></li>
+          <li><a href="#process">From idea to working app</a></li>
+          <li><a href="#journey">What happens when you use it</a></li>
+          <li><a href="#files">The project files</a></li>
+          <li><a href="#choices">What is not in this draft</a></li>
+        </ul>
+      </nav>
+
+      <aside class="callout">
+        <strong>A note about the plan:</strong>
+        The technical specification currently suggests a simple browser app made with HTML,
+        CSS, and JavaScript. Those are recommendations in a draft. This guide explains what
+        they mean; it does not ask you to approve the stack or start coding now.
+      </aside>
+
+      <section id="big-picture">
+        <h2>The big picture</h2>
+        <p>
+          An app is a set of instructions that a computer follows to do something useful.
+          For Japanese Word Kitchen, those instructions make the restaurant screens appear,
+          choose vocabulary cards, respond to your ratings, and remember your custom words.
+        </p>
+        <p>
+          In the proposed setup, your browser (the program you use to visit websites)
+          reads the app's files and shows the result on your screen. The app runs on your
+          own computer. It does not need an online account or a separate computer somewhere
+          else to run.
+        </p>
+        <div class="flow" aria-label="App building flow">
+          <span>Plan</span><b aria-hidden="true">→</b>
+          <span>Write files</span><b aria-hidden="true">→</b>
+          <span>Browser reads them</span><b aria-hidden="true">→</b>
+          <span>App appears</span><b aria-hidden="true">→</b>
+          <span>Try and improve</span>
+        </div>
+      </section>
+
+      <section id="ingredients">
+        <h2>The main ingredients</h2>
+        <div class="term-list">
+          <article class="term">
+            <h3>HTML — the structure</h3>
+            <p>
+              HTML is the basic written structure of a web page. It says what things are:
+              a heading, a button, a picture, a form, or a paragraph.
+            </p>
+            <div class="analogy">
+              Think of it as the room layout and furniture in a restaurant. It puts the
+              counter, menu, and table in their places.
+            </div>
+          </article>
+
+          <article class="term">
+            <h3>CSS — the appearance</h3>
+            <p>
+              CSS describes how the page looks: colors, sizes, spacing, fonts, and how
+              things rearrange on a small screen.
+            </p>
+            <div class="analogy">
+              Think of it as paint, lighting, tablecloths, and decorations. For this app,
+              it would help create the warm paper and cozy restaurant feeling.
+            </div>
+          </article>
+
+          <article class="term">
+            <h3>JavaScript — the behavior</h3>
+            <p>
+              JavaScript is a programming language. The app uses it to react when you click
+              **Let's Study**, flip a card, rate a word, or save a vocabulary pair.
+            </p>
+            <div class="analogy">
+              If HTML sets up the restaurant and CSS decorates it, JavaScript is the set
+              of instructions telling the staff what to do when a customer makes a choice.
+            </div>
+          </article>
+
+          <article class="term">
+            <h3>Browser — where you see the app</h3>
+            <p>
+              Safari, Chrome, Firefox, and Edge are browsers. A browser opens web pages and
+              can run the HTML, CSS, and JavaScript files that make this app.
+            </p>
+          </article>
+
+          <article class="term">
+            <h3>File — one saved piece of the project</h3>
+            <p>
+              A file is a named item on your computer. For example, <code>index.html</code>
+              could hold the page structure and <code>styles.css</code> could hold its
+              appearance instructions.
+            </p>
+          </article>
+
+          <article class="term">
+            <h3>Code — instructions written for a computer</h3>
+            <p>
+              Code is text written in a language the computer can follow. You and the AI
+              agent can read and change it in VS Code; the browser uses it to run the app.
+            </p>
+          </article>
+
+          <article class="term">
+            <h3>VS Code — the workshop</h3>
+            <p>
+              VS Code is an editor for opening project folders and changing files. It is
+              where we can look at the app's instructions together. It is not the app's
+              browser and does not, by itself, put the app online.
+            </p>
+          </article>
+
+          <article class="term">
+            <h3>AI coding agent — a helper in the workshop</h3>
+            <p>
+              An AI coding agent can read project files, suggest or make changes, and help
+              explain errors. You remain the project owner: you can ask questions, inspect
+              changes, and decide what to keep.
+            </p>
+          </article>
+
+          <article class="term">
+            <h3>Data — information the app uses</h3>
+            <p>
+              In this app, data includes dish names, ingredient lists, Japanese-English
+              pairs, ratings, and missed words. Some data is part of the app; some is
+              entered by the learner.
+            </p>
+          </article>
+
+          <article class="term">
+            <h3>localStorage — a small browser notebook</h3>
+            <p>
+              <code>localStorage</code> is a browser feature that can remember small pieces
+              of information for a website on that device. The draft proposes it for
+              custom words and missed words.
+            </p>
+            <div class="analogy">
+              Imagine a notebook kept in this browser on this computer. It is not an online
+              account, and it normally will not carry your saved words to another device.
+            </div>
+          </article>
+
+          <article class="term">
+            <h3>Server — a program that waits for requests</h3>
+            <p>
+              A server is a program that gives files to a browser when asked. For this
+              local app, an optional tiny server can make opening the project in a browser
+              more reliable. It would run on your own computer, not on a public website.
+            </p>
+          </article>
+
+          <article class="term">
+            <h3>Terminal — a place to type computer commands</h3>
+            <p>
+              A terminal is a text window where you can ask your computer to run a program.
+              The draft run command uses it to start the optional local server. We can go
+              through that command together when it is time; you do not need to memorize it.
+            </p>
+          </article>
+
+          <article class="term">
+            <h3>Python's <code>http.server</code> — a local file helper</h3>
+            <p>
+              Python is a programming language. It includes a small tool named
+              <code>http.server</code> that can serve project files to your browser from
+              your own computer. It is one possible way to preview this kind of app, not
+              part of the app's learning logic.
+            </p>
+          </article>
+
+          <article class="term">
+            <h3>Framework — a pre-arranged set of building pieces</h3>
+            <p>
+              A framework is a collection of prepared rules and tools that helps organize
+              an app. React is one example. The current spec draft suggests not using one
+              at first, to avoid extra setup while learning the core app.
+            </p>
+          </article>
+
+          <article class="term">
+            <h3>Backend and database — the behind-the-scenes option</h3>
+            <p>
+              A backend is the part of an app that runs on another computer and handles
+              requests. A database is an organized place to store information. The current
+              draft does not include either: the small amount of learner data can stay in
+              the browser for this proof of concept.
+            </p>
+          </article>
+
+          <article class="term">
+            <h3>Deployment — putting an app on the internet</h3>
+            <p>
+              Deployment means publishing an app somewhere online so other people can visit
+              it. It is optional for this project plan. A local app can be recorded for a
+              demo video; publishing it online is a separate step.
+            </p>
+          </article>
+
+          <article class="term">
+            <h3>Responsive design — fitting different screens</h3>
+            <p>
+              Responsive design means arranging a page so it remains readable on different
+              screen sizes, such as a laptop and a phone. CSS can handle much of this.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="process">
+        <h2>The builder's journey: what happens behind the scenes</h2>
+        <p>
+          This is the likely technical path from the approved idea to a working browser
+          app. Each stage produces something we can look at or try before moving on. The
+          flow is a plan, not work that has all happened already.
+        </p>
+        <div class="build-flow" aria-label="Technical build process in order">
+          <article class="build-stage">
+            <span class="stage-number">1</span>
+            <h3>Read the plan</h3>
+            <p>
+              I compare the approved scope and product requirements with the technical
+              spec. This tells me what must work and what is deliberately out of scope.
+            </p>
+            <span class="term-chip">requirements</span>
+            <span class="term-chip">specification</span>
+          </article>
+          <article class="build-stage">
+            <span class="stage-number">2</span>
+            <h3>Inspect the project folder</h3>
+            <p>
+              I check which files already exist and how the project is arranged before
+              changing anything. This avoids replacing existing work accidentally.
+            </p>
+            <span class="term-chip">workspace</span>
+            <span class="term-chip">file structure</span>
+          </article>
+          <article class="build-stage">
+            <span class="stage-number">3</span>
+            <h3>Make a small build step</h3>
+            <p>
+              I create or update a small group of related files—for example, the page
+              structure first, then its styling, then its behavior. The AI agent writes
+              proposed code in the project; you can review it and ask what it means.
+            </p>
+            <span class="term-chip">HTML</span>
+            <span class="term-chip">CSS</span>
+            <span class="term-chip">JavaScript</span>
+          </article>
+          <article class="build-stage">
+            <span class="stage-number">4</span>
+            <h3>Run it locally</h3>
+            <p>
+              A local web server can send the files from your computer to your browser.
+              The browser requests the page and its linked files, then displays the app.
+              “Local” means this preview is running on your computer.
+            </p>
+            <span class="term-chip">server</span>
+            <span class="term-chip">localhost</span>
+            <span class="term-chip">browser</span>
+          </article>
+          <article class="build-stage">
+            <span class="stage-number">5</span>
+            <h3>Connect a user action to a result</h3>
+            <p>
+              JavaScript listens for an action such as clicking Flip. It updates the
+              current app data, then changes the page so the browser shows the answer,
+              rating buttons, or earned ingredient.
+            </p>
+            <span class="term-chip">event</span>
+            <span class="term-chip">function</span>
+            <span class="term-chip">state</span>
+          </article>
+          <article class="build-stage">
+            <span class="stage-number">6</span>
+            <h3>Save what should persist</h3>
+            <p>
+              When a custom word or missed word should survive a refresh, JavaScript
+              writes it to localStorage. On the next visit, the app reads it back and
+              uses it to fill the screen.
+            </p>
+            <span class="term-chip">data</span>
+            <span class="term-chip">localStorage</span>
+          </article>
+          <article class="build-stage">
+            <span class="stage-number">7</span>
+            <h3>Check the behavior</h3>
+            <p>
+              I try the requirement in the browser: add a word, flip a card, rate it,
+              refresh, and review it. A test is a repeatable check that the app gives
+              the expected result.
+            </p>
+            <span class="term-chip">test</span>
+            <span class="term-chip">acceptance criteria</span>
+          </article>
+          <article class="build-stage">
+            <span class="stage-number">8</span>
+            <h3>Diagnose and adjust</h3>
+            <p>
+              If something fails, I look at the visible result and the browser's
+              developer console, which reports JavaScript errors. I trace the issue to
+              the relevant code, make a focused change, and check again.
+            </p>
+            <span class="term-chip">debugging</span>
+            <span class="term-chip">console</span>
+          </article>
+          <article class="build-stage">
+            <span class="stage-number">9</span>
+            <h3>Keep a checkpoint and prepare to share</h3>
+            <p>
+              A Git commit is a named checkpoint of the project files, so we can see
+              what changed at each verified step. At the end, we prepare the demo video
+              and public GitHub repository; publishing a live website is a separate,
+              optional deployment step.
+            </p>
+            <span class="term-chip">Git</span>
+            <span class="term-chip">commit</span>
+            <span class="term-chip">deployment</span>
+          </article>
+        </div>
+
+        <h3>A single change, traced through the computer</h3>
+        <p>
+          For example, when you rate a card “4,” the button click is an <strong>event</strong>.
+          A JavaScript <strong>event handler</strong> receives it, updates the session's
+          <strong>state</strong> (the app's current working information), and tells the
+          page to show the next ingredient. If the action changes lasting information,
+          the app also saves that data in <strong>localStorage</strong>.
+        </p>
+        <div class="flow" aria-label="What happens when a card is rated">
+          <span>Click rating 4</span><b aria-hidden="true">→</b>
+          <span>JavaScript handles event</span><b aria-hidden="true">→</b>
+          <span>Session data updates</span><b aria-hidden="true">→</b>
+          <span>Browser redraws the view</span>
+        </div>
+        <p class="small">
+          In this example, earned ingredients are session progress; custom and missed
+          vocabulary are the information the plan says should persist between visits.
+          The exact save rules will be confirmed against the PRD as the app is built.
+        </p>
+      </section>
+
+      <section id="journey">
+        <h2>What happens when you use the app</h2>
+        <p>One study session, traced from your click to what you see:</p>
+        <ol class="steps">
+          <li>
+            <strong>You choose “Let's Study.”</strong>
+            JavaScript responds to the click and prepares a session.
+          </li>
+          <li>
+            <strong>The app chooses dishes and words.</strong>
+            The app's built-in lists provide the dish and vocabulary information. Its
+            instructions pick three different dishes and fill their card slots without
+            repeating a word pair in that session.
+          </li>
+          <li>
+            <strong>The browser draws the tabletop.</strong>
+            HTML provides the page pieces, CSS styles the table, and JavaScript fills in
+            the current dish and word.
+          </li>
+          <li>
+            <strong>You flip and rate the word.</strong>
+            JavaScript reveals the other language. A rating of 3 or 4 adds the next
+            ingredient; a rating of 1 or 2 adds the word to the missed tray.
+          </li>
+          <li>
+            <strong>The dish reveal appears.</strong>
+            The app shows the illustration for the number of ingredients earned and a
+            cultural fact, then continues to the next dish.
+          </li>
+          <li>
+            <strong>The app saves the lasting information.</strong>
+            Custom words and missed words are written to the browser's localStorage so
+            they can be read again on this browser and device later.
+          </li>
+        </ol>
+        <p class="small">
+          These are the behaviors described in the approved PRD. The exact way the files
+          are organized is still a technical-plan choice.
+        </p>
+      </section>
+
+      <section id="files">
+        <h2>The project files</h2>
+        <p>
+          A project folder is like a box holding all the related pieces of the app. The
+          current spec draft sketches a folder structure like this:
+        </p>
+        <pre><code>project/
+├── index.html          the page structure
+├── styles.css          colors, layout, and visual design
+├── app.js              behavior and screen updates
+├── data/
+│   ├── dishes.js       dish names, ingredients, and facts
+│   └── vocabulary.js   the built-in word pairs
+├── state/
+│   ├── storage.js      read and write saved words
+│   └── session.js      keep track of the current study session
+└── devpost/            the planning documents and review pages</code></pre>
+        <p class="small">
+          This is only a proposed map, not a set of files you need to create or understand
+          all at once. The final structure should match the choices we agree on.
+        </p>
+      </section>
+
+      <section id="choices">
+        <h2>What is not in this draft</h2>
+        <p>
+          The current technical draft proposes no account, no password, no online database,
+          and no cross-device syncing. It also does not require the app to be published on
+          the internet before it can be tried or recorded.
+        </p>
+        <p>
+          Those omissions are deliberate simplifications for a small first version: the
+          central idea is the vocabulary-to-dish experience. If any of these choices feels
+          confusing or unsuitable, we can pause and discuss it before treating the draft
+          as approved.
+        </p>
+      </section>
+
+      <footer>
+        Made as a companion to the Japanese Word Kitchen planning documents.
+      </footer>
+    </main>
+  </body>
+</html>

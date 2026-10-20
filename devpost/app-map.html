@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="An offline-friendly guide to the Japanese Word Kitchen app files and code paths."
+    />
+    <title>Japanese Word Kitchen — App Map</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --paper: #f8f0df;
+        --card: #fffaf0;
+        --ink: #392b21;
+        --soft-ink: #675343;
+        --line: #d8c5a3;
+        --accent: #7c4b34;
+        --green: #526b4d;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 32px 20px 56px;
+        background: var(--paper);
+        color: var(--ink);
+        font: 16px/1.6 system-ui, sans-serif;
+      }
+
+      h1, h2, h3 { line-height: 1.2; }
+      h1 { max-width: 800px; margin-bottom: 8px; font-size: clamp(2rem, 5vw, 3rem); }
+      h2 { margin-top: 38px; font-size: 1.55rem; }
+      h3 { margin-bottom: 8px; font-size: 1.05rem; }
+      a { color: #69402d; text-underline-offset: 3px; }
+      a:focus-visible { outline: 3px solid #a65a2e; outline-offset: 3px; }
+      code { overflow-wrap: anywhere; }
+      .lede, .muted { color: var(--soft-ink); }
+      .lede { max-width: 780px; font-size: 1.12rem; }
+      .panel, .file-card, .route-stop {
+        padding: 18px;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+      }
+
+      .diagram {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        align-items: stretch;
+      }
+
+      .diagram p { margin: 0; }
+      .diagram .panel { min-width: 0; }
+      .diagram .center { border-color: #b78a5b; }
+      .diagram strong { display: block; margin-bottom: 5px; color: var(--accent); }
+      .diagram .connection {
+        margin-top: 10px;
+        color: var(--green);
+        font-weight: 650;
+      }
+
+      .file-groups {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .file-card ul, .route-stop ul { margin: 8px 0 0; padding-left: 20px; }
+      .file-card li + li { margin-top: 6px; }
+      .route {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .route-stop .number {
+        display: inline-grid;
+        width: 28px;
+        height: 28px;
+        margin-bottom: 8px;
+        place-items: center;
+        border-radius: 50%;
+        background: #e9d7b5;
+        font-weight: 700;
+      }
+
+      .change-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 24px; }
+      .change-list p { margin: 5px 0; }
+      .callout { border-left: 4px solid var(--green); }
+      .fine-print { margin-top: 30px; font-size: 0.9rem; }
+
+      @media (max-width: 720px) {
+        body { padding: 22px 14px 40px; }
+        .diagram, .route, .file-groups, .change-list { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <p class="muted">Project guide · Japanese Word Kitchen</p>
+      <h1>How the app fits together</h1>
+      <p class="lede">
+        <code>app.js</code> is the coordinator, not the whole app. The page shell loads it,
+        it connects user actions to the screen and project rules, and smaller files provide
+        the screen content, artwork, data, storage, and checks.
+      </p>
+    </header>
+
+    <main>
+      <section aria-labelledby="flow-title">
+        <h2 id="flow-title">One action through the code</h2>
+        <figure>
+          <div class="diagram" role="img" aria-label="index.html loads app.js. app.js routes a low study rating to session state and browser storage, then renders the updated screen. On a later page load, app.js asks browser storage to restore progress.">
+            <div class="panel">
+              <strong>1 · Page starts</strong>
+              <p><code>index.html</code> provides <code>#app</code> and loads <code>app.js</code>.</p>
+              <p class="connection">loads -></p>
+            </div>
+            <div class="panel center">
+              <strong>2 · User action</strong>
+              <p><code>app.js</code> routes the low rating, updates the missed-word list, saves it, and asks a component to render.</p>
+              <p class="connection">uses -></p>
+            </div>
+            <div class="panel">
+              <strong>3 · Visible result and return visit</strong>
+              <p>Components show the updated screen. <code>utils/storage.js</code> writes progress to browser storage and loads it at startup.</p>
+              <p class="connection">restores on next visit</p>
+            </div>
+          </div>
+          <figcaption class="muted">
+            Direct imports are the files <code>app.js</code> names itself. Some of those files
+            import other helpers, so the full app has indirect connections too.
+          </figcaption>
+        </figure>
+        <div class="panel">
+          <p><strong>Direct imports from <code>app.js</code>:</strong> <code>components/home.js</code>, <code>components/reveal.js</code>, <code>components/study.js</code>, both <code>data/</code> files, both <code>state/</code> files, and <code>utils/speech.js</code>, <code>utils/storage.js</code>, and <code>utils/vocabulary.js</code>.</p>
+          <p><strong>Indirect connections:</strong> <code>home.js</code> imports the word/review screens and restaurant art; study and review screens import pronunciation/render helpers; reveal imports character art and dish rendering; session rules import the shuffle helper.</p>
+        </div>
+      </section>
+
+      <section aria-labelledby="route-title">
+        <h2 id="route-title">A three-stop route through one saved word</h2>
+        <div class="route">
+          <article class="route-stop">
+            <span class="number">1</span>
+            <h3>The action and state change</h3>
+            <p><a href="../app.js">Open <code>app.js</code></a> and find <code>handleAction</code>, then the <code>rate</code> action. A 1–2 rating adds that card to <code>missedWords</code>.</p>
+          </article>
+          <article class="route-stop">
+            <span class="number">2</span>
+            <h3>Saving and restoring</h3>
+            <p>In <a href="../app.js"><code>app.js</code></a>, find <code>persistProgress</code>. Then open <a href="../utils/storage.js"><code>utils/storage.js</code></a> and compare <code>saveProgress</code> with <code>loadProgress</code>.</p>
+          </article>
+          <article class="route-stop">
+            <span class="number">3</span>
+            <h3>The evidence</h3>
+            <p>Open <a href="../tests/storage.test.js"><code>tests/storage.test.js</code></a> and find “progress loads and saves custom words”. It checks that the same progress data comes back after saving and loading.</p>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="inventory-title">
+        <h2 id="inventory-title">Project file inventory</h2>
+        <p class="muted">This is every tracked project file, grouped by its job. Workflow-only local files are not part of the app.</p>
+        <div class="file-groups">
+          <article class="file-card">
+            <h3>Browser entry and coordination</h3>
+            <ul>
+              <li><a href="../index.html"><code>index.html</code></a> — document shell, app mount point, stylesheet, and JavaScript entry.</li>
+              <li><a href="../app.js"><code>app.js</code></a> — startup, saved app state, screen selection, button/form routing, and storage coordination.</li>
+              <li><a href="../styles.css"><code>styles.css</code></a> — layout, colors, typography, illustrations, and responsive styling.</li>
+            </ul>
+          </article>
+
+          <article class="file-card">
+            <h3>Screen and artwork components</h3>
+            <ul>
+              <li><a href="../components/home.js"><code>components/home.js</code></a> — restaurant home, sidebar navigation, and screen layout.</li>
+              <li><a href="../components/study.js"><code>components/study.js</code></a> — study tabletop and vocabulary card.</li>
+              <li><a href="../components/vocab.js"><code>components/vocab.js</code></a> — add/edit/remove word form and custom-word list.</li>
+              <li><a href="../components/review.js"><code>components/review.js</code></a> — missed-word review card.</li>
+              <li><a href="../components/reveal.js"><code>components/reveal.js</code></a> — dish reveal, served screen, and aunties' counter ending.</li>
+              <li><a href="../components/restaurant.js"><code>components/restaurant.js</code></a> — restaurant and character illustration markup.</li>
+              <li><a href="../components/pronunciation.js"><code>components/pronunciation.js</code></a> — Japanese pronunciation button markup.</li>
+            </ul>
+          </article>
+
+          <article class="file-card">
+            <h3>Content and behavior</h3>
+            <ul>
+              <li><a href="../data/dishes.js"><code>data/dishes.js</code></a> — dish names, ingredients, facts, and artwork data.</li>
+              <li><a href="../data/vocabulary.js"><code>data/vocabulary.js</code></a> — built-in English–Japanese word pairs.</li>
+              <li><a href="../state/session.js"><code>state/session.js</code></a> — study-session setup, ratings, dish outcomes, and fact rotation.</li>
+              <li><a href="../state/review.js"><code>state/review.js</code></a> — rules for keeping or clearing reviewed missed words.</li>
+            </ul>
+          </article>
+
+          <article class="file-card">
+            <h3>Shared helpers</h3>
+            <ul>
+              <li><a href="../utils/render.js"><code>utils/render.js</code></a> — safe text handling and dish artwork rendering.</li>
+              <li><a href="../utils/shuffle.js"><code>utils/shuffle.js</code></a> — random ordering for sessions.</li>
+              <li><a href="../utils/vocabulary.js"><code>utils/vocabulary.js</code></a> — required-field and duplicate-pair checks.</li>
+              <li><a href="../utils/speech.js"><code>utils/speech.js</code></a> — browser Japanese speech synthesis.</li>
+              <li><a href="../utils/storage.js"><code>utils/storage.js</code></a> — browser-local progress loading and saving.</li>
+            </ul>
+          </article>
+
+          <article class="file-card">
+            <h3>Automated checks</h3>
+            <ul>
+              <li><a href="../tests/render.test.js"><code>tests/render.test.js</code></a> — screen output, illustration, and counter-message checks.</li>
+              <li><a href="../tests/session.test.js"><code>tests/session.test.js</code></a> — session, rating, vocabulary, review, and fact-cycle rules.</li>
+              <li><a href="../tests/speech.test.js"><code>tests/speech.test.js</code></a> — speech support, voice loading, and errors.</li>
+              <li><a href="../tests/storage.test.js"><code>tests/storage.test.js</code></a> — saved progress, unavailable storage, and fact-cycle restoration.</li>
+            </ul>
+          </article>
+
+          <article class="file-card">
+            <h3>Running and project support</h3>
+            <ul>
+              <li><a href="../README.md"><code>README.md</code></a> — local run and test commands.</li>
+              <li><a href="../package.json"><code>package.json</code></a> — project metadata and the built-in Node test command; no app dependencies.</li>
+              <li><a href="../.gitignore"><code>.gitignore</code></a> — keeps local secrets and personal learner context out of Git.</li>
+            </ul>
+          </article>
+
+          <article class="file-card">
+            <h3>Planning and review documents</h3>
+            <ul>
+              <li><a href="./scope.md"><code>devpost/scope.md</code></a> and <a href="./scope.html"><code>scope.html</code></a> — approved project boundary and visual companion.</li>
+              <li><a href="./prd.md"><code>devpost/prd.md</code></a> and <a href="./prd.html"><code>prd.html</code></a> — product behavior and visual companion.</li>
+              <li><a href="./spec.md"><code>devpost/spec.md</code></a> and <a href="./spec.html"><code>spec.html</code></a> — technical plan and visual companion.</li>
+              <li><a href="./checklist.md"><code>devpost/checklist.md</code></a> — build slices, checks, feedback, and completion state.</li>
+              <li><a href="./app-map.html"><code>devpost/app-map.html</code></a> — this source and connection guide.</li>
+              <li><a href="./dish-gallery.html"><code>dish-gallery.html</code></a> — review gallery for dish-art variants.</li>
+              <li><a href="./technical-terms.html"><code>technical-terms.html</code></a> — project terminology guide.</li>
+            </ul>
+          </article>
+        </div>
+        <p class="muted">The personal learner profile and local agent-workflow files are deliberately not listed as app files or included in this public-safe map.</p>
+      </section>
+
+      <section aria-labelledby="change-title">
+        <h2 id="change-title">To change this, start here</h2>
+        <div class="change-list">
+          <p>Button flow or when a screen changes: <a href="../app.js"><code>app.js</code></a>, <code>handleAction</code>.</p>
+          <p>Screen layout or component copy: the matching file in <a href="../components/"><code>components/</code></a>.</p>
+          <p>Dish content or built-in words: <a href="../data/dishes.js"><code>data/dishes.js</code></a> or <a href="../data/vocabulary.js"><code>data/vocabulary.js</code></a>.</p>
+          <p>Study and review rules: <a href="../state/session.js"><code>state/session.js</code></a> or <a href="../state/review.js"><code>state/review.js</code></a>.</p>
+          <p>Saved fields or browser-storage behavior: <a href="../utils/storage.js"><code>utils/storage.js</code></a>.</p>
+          <p>Page appearance: <a href="../styles.css"><code>styles.css</code></a>.</p>
+        </div>
+      </section>
+
+      <section class="panel callout" aria-labelledby="practice-title">
+        <h2 id="practice-title">A practice to reuse</h2>
+        <p>
+          Trace a visible action through its state update and persistence, then check the
+          expected behavior with a focused test. Here, <code>app.js</code> records a low-rated
+          word, <code>utils/storage.js</code> saves it, and <code>tests/storage.test.js</code>
+          checks a save/load round trip. The project's 25 automated tests pass.
+        </p>
+      </section>
+
+      <section aria-labelledby="run-title">
+        <h2 id="run-title">Run it again</h2>
+        <ol>
+          <li>From the project folder, run <code>python3 -m http.server 8000</code>.</li>
+          <li>Open <code>http://localhost:8000</code>.</li>
+          <li>Run checks with <code>npm test</code>.</li>
+        </ol>
+        <p class="muted">
+          This map describes source commit <code>945d003</code>. It is a snapshot and can
+          drift if the code changes. Browser progress is saved on that browser/device; it is
+          not synced across devices.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

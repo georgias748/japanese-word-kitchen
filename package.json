@@ -1,0 +1,8 @@
+{
+  "name": "japanese-word-kitchen",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  }
+}

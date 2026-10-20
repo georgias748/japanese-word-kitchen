@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Japanese Word Kitchen — Technical Spec</title>
+    <style>
+      :root {
+        --paper: #f9f1d8;
+        --ink: #2a1d15;
+        --gold: #d9b76b;
+        --wood: #8b5a3c;
+        --sage: #9aa879;
+        --rose: #c98575;
+        --panel: #fbf6eb;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        background: linear-gradient(#f7e9c8, #efe1b5);
+        color: var(--ink);
+        font-family: "Georgia", serif;
+        line-height: 1.6;
+      }
+
+      .wrap {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 24px;
+      }
+
+      .card {
+        background: rgba(251, 246, 235, 0.96);
+        border: 2px solid rgba(130, 92, 53, 0.35);
+        border-radius: 18px;
+        box-shadow: 0 10px 26px rgba(52, 34, 22, 0.14);
+        padding: 28px 30px;
+      }
+
+      h1, h2, h3 {
+        margin: 0 0 0.8em;
+      }
+
+      .subtitle {
+        color: #5d3f2a;
+        margin-bottom: 1.2em;
+        font-style: italic;
+      }
+
+      .diagram {
+        margin: 20px 0 30px;
+        background: #fffaf0;
+        border: 1px solid rgba(93, 63, 42, 0.2);
+        border-radius: 14px;
+        padding: 18px;
+      }
+
+      svg {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .node {
+        fill: #f8e4b4;
+        stroke: #7a4e2d;
+        stroke-width: 2;
+      }
+
+      .label {
+        font-size: 18px;
+        fill: var(--ink);
+        font-weight: 600;
+      }
+
+      .small {
+        font-size: 14px;
+      }
+
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .step {
+        background: #f3ebd8;
+        border: 1px solid rgba(91, 64, 40, 0.2);
+        border-radius: 12px;
+        padding: 12px;
+      }
+
+      .step strong {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      ul {
+        margin-top: 0;
+        padding-left: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="card">
+        <h1>Japanese Word Kitchen</h1>
+        <div class="subtitle">Technical blueprint review companion</div>
+
+        <p>
+          This app is a single-device browser experience: the learner opens a cozy restaurant home,
+          studies a few Japanese vocabulary cards, earns ingredients for a dish, and returns to a calm
+          home view with the missed-words tray ready for later review.
+        </p>
+
+        <div class="diagram">
+          <svg viewBox="0 0 920 260" aria-label="Japanese Word Kitchen architecture diagram">
+            <defs>
+              <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L9,3 z" fill="#5d3f2a" />
+              </marker>
+            </defs>
+
+            <rect class="node" x="20" y="80" width="170" height="90" rx="14" />
+            <text class="label" x="105" y="130" text-anchor="middle">Home</text>
+
+            <rect class="node" x="250" y="40" width="200" height="170" rx="14" />
+            <text class="label" x="350" y="90" text-anchor="middle">Study Session</text>
+            <text class="small" x="350" y="120" text-anchor="middle">3 dishes</text>
+            <text class="small" x="350" y="140" text-anchor="middle">randomized cards</text>
+            <text class="small" x="350" y="160" text-anchor="middle">no repeats</text>
+            <text class="small" x="350" y="180" text-anchor="middle">custom + built-in</text>
+
+            <rect class="node" x="510" y="35" width="190" height="180" rx="14" />
+            <text class="label" x="605" y="88" text-anchor="middle">Tabletop Flow</text>
+            <text class="small" x="605" y="118" text-anchor="middle">Flip</text>
+            <text class="small" x="605" y="138" text-anchor="middle">rate 1–4</text>
+            <text class="small" x="605" y="158" text-anchor="middle">earn ingredient</text>
+            <text class="small" x="605" y="178" text-anchor="middle">missed tray</text>
+
+            <rect class="node" x="760" y="80" width="140" height="90" rx="14" />
+            <text class="label" x="830" y="120" text-anchor="middle">Saved</text>
+            <text class="small" x="830" y="144" text-anchor="middle">localStorage</text>
+
+            <path d="M190 125 L250 125" stroke="#5d3f2a" stroke-width="3" fill="none" marker-end="url(#arrow)" />
+            <path d="M450 125 L510 125" stroke="#5d3f2a" stroke-width="3" fill="none" marker-end="url(#arrow)" />
+            <path d="M700 125 L760 125" stroke="#5d3f2a" stroke-width="3" fill="none" marker-end="url(#arrow)" />
+            <path d="M830 170 L830 210 L605 210 L605 215" stroke="#5d3f2a" stroke-width="3" fill="none" marker-end="url(#arrow)" />
+            <path d="M605 215 L605 175" stroke="#5d3f2a" stroke-width="3" fill="none" marker-end="url(#arrow)" />
+          </svg>
+        </div>
+
+        <h2>Core journey</h2>
+        <div class="steps">
+          <div class="step"><strong>1. Home</strong> The learner chooses study, vocabulary, or review.</div>
+          <div class="step"><strong>2. Session</strong> Three dish cards are selected and populated with words.
+          </div>
+          <div class="step"><strong>3. Study</strong> The learner flips each card and rates it 1–4.</div>
+          <div class="step"><strong>4. Progress</strong> 3–4 earns an ingredient; 1–2 sends it to missed words.</div>
+          <div class="step"><strong>5. Finish</strong> Each dish reveals a final illustration and a cultural fact.</div>
+          <div class="step"><strong>6. Return</strong> The app sends the learner back to home, with saved state intact.</div>
+        </div>
+
+        <h2>Key components</h2>
+        <ul>
+          <li>Restaurant home and navigation</li>
+          <li>Vocabulary manager</li>
+          <li>Study session engine</li>
+          <li>Tabletop card flow</li>
+          <li>Dish reveal and cultural fact view</li>
+          <li>Missed-word review flow</li>
+          <li>Browser storage persistence</li>
+        </ul>
+
+        <h2>Important design decisions</h2>
+        <ul>
+          <li>Single-page browser app for the prototype.</li>
+          <li>Custom data stored in browser localStorage, not a backend.</li>
+          <li>No user accounts or cross-device sync. This matches the POC boundary.</li>
+          <li>Predetermined dish illustrations keyed to earned ingredient counts.</li>
+          <li>Original cozy artwork: Heian-inspired paper and ink, with gentle whimsy, natural warmth, and expressive hand-drawn animation as broad mood cues. Studio Ghibli is an inspiration reference only; no recognizable characters, settings, or film imagery are reproduced.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

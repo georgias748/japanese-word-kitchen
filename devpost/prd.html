@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Japanese Word Kitchen — Approved PRD</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --paper: #fff7df;
+        --paper-deep: #f0dfae;
+        --ink: #32291f;
+        --muted: #706451;
+        --red: #9b4838;
+        --sage: #667354;
+        --line: #d8c79e;
+        --shadow: #59411e18;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          radial-gradient(ellipse at 12% 8%, #fff9e9 0, transparent 45%),
+          repeating-linear-gradient(2deg, #ead9ad 0 1px, #eddfb9 1px 5px);
+        font: 16px/1.65 Georgia, "Times New Roman", serif;
+      }
+      main { width: min(1000px, calc(100% - 32px)); margin: 36px auto 72px; }
+      header, .panel {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: var(--paper);
+        box-shadow: 0 12px 34px var(--shadow);
+      }
+      header { padding: clamp(24px, 5vw, 46px); }
+      .eyebrow {
+        color: var(--red);
+        font: 800 .75rem/1.4 "Segoe UI", sans-serif;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+      }
+      h1, h2, h3 { line-height: 1.2; }
+      h1 { margin: 8px 0; font-size: clamp(2.2rem, 6vw, 4rem); }
+      h2 { margin: 0; font-size: 1.45rem; }
+      h3 { margin: 20px 0 7px; font-size: 1.1rem; }
+      p { margin: 8px 0 0; }
+      .muted { color: var(--muted); }
+      .callout {
+        margin-top: 18px;
+        padding: 12px 16px;
+        border-left: 4px solid var(--red);
+        border-radius: 0 10px 10px 0;
+        background: #f6ebc9;
+      }
+      .panel { margin-top: 16px; padding: 22px; }
+      .journey { overflow: hidden; }
+      .diagram { display: block; width: 100%; height: auto; margin-top: 18px; }
+      .diagram text { fill: var(--ink); font: 15px "Segoe UI", sans-serif; }
+      .diagram .node { fill: #f5e9c8; stroke: #cdbb8f; stroke-width: 2; }
+      .diagram .edge { fill: none; stroke: var(--red); stroke-width: 2.5; }
+      .menu {
+        width: 100%;
+        margin-top: 14px;
+        border-collapse: collapse;
+        font: 15px/1.5 "Segoe UI", sans-serif;
+      }
+      th, td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: left; }
+      th { color: var(--red); }
+      td:last-child, th:last-child { text-align: center; }
+      details.panel { padding: 0; overflow: hidden; }
+      summary {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 17px 21px;
+        cursor: pointer;
+        font-weight: 700;
+      }
+      summary::-webkit-details-marker { display: none; }
+      summary::after { content: "+"; color: var(--red); font: 700 1.25rem "Segoe UI", sans-serif; }
+      details[open] summary::after { content: "−"; }
+      .inside { padding: 0 22px 22px; border-top: 1px solid var(--line); }
+      ul { padding-left: 22px; }
+      li + li { margin-top: 5px; }
+      .tag {
+        display: inline-block;
+        margin: 3px 5px 3px 0;
+        padding: 3px 9px;
+        border-radius: 99px;
+        background: #e7eadb;
+        color: #46513a;
+        font: 700 .82rem "Segoe UI", sans-serif;
+      }
+      .criteria { color: #49543d; }
+      footer { padding: 20px 4px; color: var(--muted); font-size: .9rem; }
+      @media (max-width: 650px) {
+        main { margin-top: 18px; }
+        .panel { padding: 17px; }
+        details.panel { padding: 0; }
+        .diagram text { font-size: 13px; }
+        th, td { padding: 7px 5px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <span class="eyebrow">Product requirements · Approved</span>
+        <h1>Japanese Word Kitchen</h1>
+        <p class="muted">A cozy Japanese restaurant-inspired vocabulary app where each learned word helps cook a recognizable dish.</p>
+        <div class="callout"><strong>Product approved.</strong> The agreed behaviors and proof-of-concept boundary guide the build.</div>
+      </header>
+
+      <section class="panel journey" aria-labelledby="journey-title">
+        <h2 id="journey-title">The complete journey</h2>
+        <p class="muted">From the restaurant doorway to a meal served across the counter—and back home, ready to study again.</p>
+        <svg class="diagram" viewBox="0 0 900 230" role="img" aria-labelledby="diagram-title diagram-desc">
+          <title id="diagram-title">Japanese Word Kitchen study journey</title>
+          <desc id="diagram-desc">Home leads to a random selection of three dishes, then cards build each dish, each dish reveals a fact, the chef serves the meal to three customers, and the app returns home.</desc>
+          <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+              <path d="M0 0 10 5 0 10z" fill="#9b4838"></path>
+            </marker>
+          </defs>
+          <g class="edge" marker-end="url(#arrow)">
+            <path d="M145 58h52"></path><path d="M350 58h52"></path><path d="M555 58h52"></path><path d="M760 58h45"></path>
+            <path d="M820 97v78H95v-76"></path>
+          </g>
+          <g>
+            <rect class="node" x="10" y="24" width="135" height="68" rx="14"></rect>
+            <text x="77" y="53" text-anchor="middle">Restaurant</text><text x="77" y="74" text-anchor="middle">home</text>
+            <rect class="node" x="197" y="24" width="153" height="68" rx="14"></rect>
+            <text x="273" y="53" text-anchor="middle">Pick 3 of</text><text x="273" y="74" text-anchor="middle">15 dishes</text>
+            <rect class="node" x="402" y="24" width="153" height="68" rx="14"></rect>
+            <text x="478" y="53" text-anchor="middle">Flip, rate,</text><text x="478" y="74" text-anchor="middle">build dishes</text>
+            <rect class="node" x="607" y="24" width="153" height="68" rx="14"></rect>
+            <text x="683" y="53" text-anchor="middle">Reveal dish</text><text x="683" y="74" text-anchor="middle">and a fact</text>
+            <rect class="node" x="805" y="24" width="85" height="68" rx="14"></rect>
+            <text x="847" y="53" text-anchor="middle">Serve</text><text x="847" y="74" text-anchor="middle">the meal</text>
+            <rect class="node" x="322" y="141" width="260" height="64" rx="14"></rect>
+            <text x="452" y="168" text-anchor="middle">Customer reaction, then home</text>
+            <text x="452" y="190" text-anchor="middle">Words and progress stay on this device</text>
+          </g>
+        </svg>
+      </section>
+
+      <details class="panel" open>
+        <summary>Restaurant home, words, and review</summary>
+        <div class="inside">
+          <p>The home is a small, cozy Japanese restaurant seen from its doorway, with a busy grandparent couple, counter, personal black-and-white photographs, a bonsai, and carefully chosen cultural details. Food-themed navigation offers <strong>Let's Study</strong>, vocabulary management, and <strong>Review</strong>.</p>
+          <p>Custom English-Japanese pairs can be added, edited, and deleted. Both sides are required. A duplicate pair is ignored with a friendly, in-world message. The 12 built-in pairs make the first session possible without custom words.</p>
+          <p>Review presents missed words one at a time with the same flip-and-rate interaction. Ratings 3–4 remove a word from the tray; ratings 1–2 keep it. Review does not add ingredients.</p>
+          <p><strong>Persistence:</strong> Custom words and missed words remain on the same device/browser between visits. No sign-in, syncing, or sharing.</p>
+          <h3>What success looks like</h3>
+          <ul class="criteria">
+            <li>Home offers study and vocabulary management, and Review when the tray is non-empty.</li>
+            <li>Blank pairs cannot be saved; duplicates leave one copy and display a styled notice.</li>
+            <li>Custom words and missed words remain available after returning on the same device/browser.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="panel">
+        <summary>Study setup and the 15-dish menu</summary>
+        <div class="inside">
+          <p>Before study, choose English-front/Japanese-answer or Japanese-front/English-answer. Each session randomly selects three different dishes. Each dish's ingredient count also sets its card count. Sample distinct custom words first, then fill any remaining slots from the 12 built-in pairs. A word pair never repeats in one session.</p>
+          <table class="menu">
+            <thead><tr><th>Dish</th><th>Ingredient and card steps</th></tr></thead>
+            <tbody>
+              <tr><td>Onigiri</td><td>3</td></tr>
+              <tr><td>Miso soup</td><td>3</td></tr>
+              <tr><td>Ramen</td><td>4</td></tr>
+              <tr><td>Sushi</td><td>4</td></tr>
+              <tr><td>Chirashi sushi</td><td>4</td></tr>
+              <tr><td>Tempura</td><td>3</td></tr>
+              <tr><td>Udon</td><td>3</td></tr>
+              <tr><td>Soba</td><td>3</td></tr>
+              <tr><td>Okonomiyaki</td><td>4</td></tr>
+              <tr><td>Takoyaki</td><td>3</td></tr>
+              <tr><td>Japanese curry rice</td><td>4</td></tr>
+              <tr><td>Oyakodon</td><td>4</td></tr>
+              <tr><td>Katsudon</td><td>4</td></tr>
+              <tr><td>Gyoza</td><td>3</td></tr>
+              <tr><td>Mochi</td><td>3</td></tr>
+            </tbody>
+          </table>
+          <p class="muted">Each dish's selected ingredients must be real, recognizable key ingredients—not arbitrary toppings or a claim to show a complete recipe.</p>
+          <h3>What success looks like</h3>
+          <ul class="criteria">
+            <li>A session contains three different menu dishes and exactly the predefined number of cards for each.</li>
+            <li>No word pair repeats; 12 built-in pairs can fill the maximum 12-card session.</li>
+            <li>The chosen card direction controls which language appears first.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="panel">
+        <summary>Study table, ingredients, and dish reveal</summary>
+        <div class="inside">
+          <p>At the very top of each study view, show only the dish name in Japanese, a dash, and its English name. The Japanese spelling will be prepared with the dish content. Study takes place at a quiet tabletop, with the vocabulary word in the middle and a <strong>Flip</strong> button at the bottom right. Pressing it reveals the other language and makes the 1–4 ratings appear at the same time:</p>
+          <p><span class="tag">3–4 · Earned</span> Add the next predefined, authentic ingredient to the dish.</p>
+          <p><span class="tag">1–2 · Missed</span> Add no ingredient; put the word in the tray for later. Do not repeat it in this session.</p>
+          <p>As words are earned, their ingredient pictures appear individually side by side on the plate in the restaurant's cartoon style. After the dish's three or four cards are complete, a little star-pop presents the whole assembled dish. Each dish has a predetermined final illustration for every possible number of earned ingredients: four variants for a three-ingredient dish (0–3 earned), or five for a four-ingredient dish (0–4 earned). Unearned ingredients are absent, and fewer earned words make the same dish look less colorful and blander. Then show a short cultural fact on decorative paper.</p>
+          <p class="callout"><strong>Visual review:</strong> <a href="dish-gallery.html">Open the complete dish illustration gallery</a> to compare all 15 dishes at every earned-ingredient count.</p>
+          <p>After flipping a study or review card, the learner can press <strong>Hear Japanese</strong> to hear the Japanese word spoken by an installed Japanese browser/device voice. It works for built-in and custom words in either card direction. If speech synthesis or a Japanese voice is unavailable, explain the requirement instead of failing silently. This uses speech synthesis rather than recorded clips or an external audio service.</p>
+          <p>Aim for three short cultural facts per dish, with two as the minimum. Facts for a dish do not repeat until that dish's fact set is exhausted.</p>
+          <h3>What success looks like</h3>
+          <ul class="criteria">
+            <li>The dish name is at the very top in Japanese, then a dash and English; the word is centered, and **Flip** is bottom right.</li>
+            <li>Pressing **Flip** reveals the answer and displays all four ratings at the same time.</li>
+            <li>After flipping a study or review card, **Hear Japanese** can speak built-in and custom words when a Japanese voice is installed.</li>
+            <li>A rating of 3 or 4 visibly adds one ingredient beside the others; 1 or 2 does not.</li>
+            <li>After the last card, a star-pop presents the predetermined assembled-dish illustration for the number of ingredients earned.</li>
+            <li>Three-ingredient dishes have four final appearance variants; four-ingredient dishes have five.</li>
+            <li>Ingredients belong to that dish; a fact appears after complete and unfinished dishes alike.</li>
+            <li>A dish's facts cycle without repetition until each available fact has appeared.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="panel">
+        <summary>Serve the meal and meet the customers</summary>
+        <div class="inside">
+          <p>After the third dish and its fact, a brief <strong>“Your food has been served!”</strong> message leads into a view from the chef's side of the counter. Three Japanese aunties react to the meal:</p>
+          <ul>
+            <li><strong>Happy:</strong> all three dishes are complete.</li>
+            <li><strong>Neutral:</strong> exactly one dish is unfinished.</li>
+            <li><strong>Upset:</strong> two or three dishes are unfinished.</li>
+          </ul>
+          <p>After their reaction, the app returns to restaurant home, where the learner can study again, manage custom words, or review.</p>
+          <h3>What success looks like</h3>
+          <ul class="criteria">
+            <li>The served message and customer view follow the third dish.</li>
+            <li>Their expression matches the number of unfinished dishes.</li>
+            <li>The flow returns to the restaurant home.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="panel">
+        <summary>Look, feel, and what we are not building</summary>
+        <div class="inside">
+          <p>The visual direction draws on Heian-period art, warm yellow papyrus-like paper, and an ink-brush feeling in decorative notes and brief messages, interpreted originally rather than copying a specific artist or artwork. Keep study text readable. The restaurant is detailed but not cluttered; the tabletop is calmer. Ingredient art and feedback notes belong to the same charming cartoon world.</p>
+          <p><strong>In the proof of concept:</strong> one home, custom vocabulary, review, a 15-dish menu, three random dishes per session, 12 built-in pairs, dish-specific facts and ingredients, the study flow, Japanese word pronunciation through an installed browser/device voice, and the counter ending.</p>
+          <p><strong>Deferred:</strong> accounts, cross-device sync, sharing, advanced spaced repetition, analytics, a larger menu, custom dishes, other cuisines, restaurant simulation, background music, cooking effects, and recorded studio audio.</p>
+          <p><strong>Content prep for the next phase:</strong> define the exact 12 built-in pairs, two or more accurate facts for each dish, and each dish's three or four authentic key ingredients.</p>
+        </div>
+      </details>
+
+      <footer>Canonical product definition: <code>devpost/prd.md</code> · Status: approved</footer>
+    </main>
+  </body>
+</html>
