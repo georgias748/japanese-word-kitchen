@@ -1,6 +1,6 @@
 # Japanese Word Kitchen
 
-A small browser-based Japanese vocabulary app. Each well-known word earns the next
+A small browser-based Japanese vocabulary app. Each word earns the next
 illustrated ingredient for a Japanese dish.
 
 ## Run locally
